@@ -1,12 +1,16 @@
-
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Ticket {
-    private static final LocalDateTime entrada = LocalDateTime.now();
-    
+    private static LocalDateTime entrada = LocalDateTime.now();
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
-    public Ticket() {
-        
+    public Ticket(LocalDateTime entrada) {
+        Ticket.entrada = entrada;
+        System.out.println("Ticket created at: " + entrada.format(formatter));
     }
-    
+
+    public static void main(String[] args) {
+        new Ticket(entrada);
+    }
 }
