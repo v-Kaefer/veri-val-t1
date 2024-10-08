@@ -20,12 +20,13 @@ public class Estacionamento {
 
         // Verificar pernoite
         if (saida.getHour() >= 8 && !entrada.toLocalDate().isEqual(saida.toLocalDate())) {
-            double valor = VALOR_PERNOITE;
+            long diasPernoite = CalculadoraTarifa.calcularDiasPernoite();
+            double valor = VALOR_PERNOITE * diasPernoite;
             return isVip ? valor * 0.5 : valor;
         }
 
         // Até 1 hora de permanência
-        if (minutos <= 60) {
+        if (minutos > 15 && minutos <= 60) {
             double valor = VALOR_FIXO;
             return isVip ? valor * 0.5 : valor;
         }

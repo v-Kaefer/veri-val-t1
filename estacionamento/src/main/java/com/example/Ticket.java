@@ -9,10 +9,11 @@ public class Ticket {
 
     public Ticket(LocalDateTime entrada) {
         Ticket.entrada = entrada;
-        System.out.println("Ticket created at: " + entrada.format(formatter));
+        System.out.println("Ticket emitido em: " + entrada.format(formatter));
     }
 
     public static void main(String[] args) {
         new Ticket(entrada);
     }
+
 }

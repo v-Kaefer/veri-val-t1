@@ -1,4 +1,16 @@
 -------------------------------------------------------------------------------
 Test set: com.example.EstacionamentoTest
 -------------------------------------------------------------------------------
-Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.068 s - in com.example.EstacionamentoTest
+Tests run: 10, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 0.092 s <<< FAILURE! - in com.example.EstacionamentoTest
+testCalcularTarifa_MaisDeUmDia(com.example.EstacionamentoTest)  Time elapsed: 0.013 s  <<< FAILURE!
+java.lang.AssertionError: expected:<150.0> but was:<50.0>
+	at com.example.EstacionamentoTest.testCalcularTarifa_MaisDeUmDia(EstacionamentoTest.java:66)
+
+testEncerrarTicket_DuranteEstacionamentoFechado(com.example.EstacionamentoTest)  Time elapsed: 0.001 s  <<< FAILURE!
+java.lang.AssertionError: expected:<0.0> but was:<30.9>
+	at com.example.EstacionamentoTest.testEncerrarTicket_DuranteEstacionamentoFechado(EstacionamentoTest.java:96)
+
+testCalcularTarifa_MaisDeUmaHoraComDesconto(com.example.EstacionamentoTest)  Time elapsed: 0.001 s  <<< FAILURE!
+java.lang.AssertionError: expected:<6.7> but was:<4.2>
+	at com.example.EstacionamentoTest.testCalcularTarifa_MaisDeUmaHoraComDesconto(EstacionamentoTest.java:57)
+

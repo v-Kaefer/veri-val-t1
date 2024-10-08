@@ -33,7 +33,7 @@ public class CalculadoraTarifa {
             valor = 0.0;
         }
         // Até 1 hora (inclusive)
-        else if (minutosTotais <= 60) {
+        else if (minutosTotais >= 60) {
             valor = 5.90;
         }
         // Acima de 1 hora e não é pernoite
