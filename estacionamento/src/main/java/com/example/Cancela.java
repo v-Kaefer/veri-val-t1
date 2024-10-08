@@ -19,7 +19,7 @@ public class Cancela {
 
     // Método para validar se o horário está dentro do funcionamento do estacionamento
     private void validarHorarioFuncionamento(LocalTime horaAtual) {
-        if (horaAtual.isBefore(HORARIO_ABERTURA) && horaAtual.isAfter(HORARIO_FECHAMENTO)) {
+        if (horaAtual.isBefore(HORARIO_ABERTURA) || horaAtual.isAfter(HORARIO_FECHAMENTO)) {
             throw new IllegalArgumentException("O estacionamento está fechado. Horário de funcionamento: 08:00 até 02:00.");
         }
     }
