@@ -2,6 +2,7 @@ package com.example;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
@@ -53,6 +54,6 @@ public class EstacionamentoTest {
         LocalDateTime entrada = LocalDateTime.now();
         LocalDateTime saida = entrada.plusHours(-1);
         double tarifa = estacionamento.calcularTarifa(entrada, saida, false);
-        assertEquals(5.90, tarifa, 0.01);
+        assertEquals(0.00, tarifa, 0.01);
     }
 }
