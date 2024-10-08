@@ -17,7 +17,7 @@ public class EstacionamentoTest {
         LocalDateTime entrada = LocalDateTime.now();
         LocalDateTime saida = entrada.plusMinutes(10);
         double tarifa = estacionamento.calcularTarifa(entrada, saida, false);
-        assertEquals(0.0, tarifa, 0.01); // Adjusted delta for double comparison
+        assertEquals(0.0, tarifa, 0.01);
     }
 
     @Test
@@ -26,7 +26,7 @@ public class EstacionamentoTest {
         LocalDateTime entrada = LocalDateTime.of(2022, 1, 1, 20, 0);
         LocalDateTime saida = LocalDateTime.of(2022, 1, 2, 10, 0);
         double tarifa = estacionamento.calcularTarifa(entrada, saida, false);
-        assertEquals(50.0, tarifa, 0.01); // Adjusted delta for double comparison
+        assertEquals(50.0, tarifa, 0.01);
     }
 
     @Test
@@ -35,7 +35,7 @@ public class EstacionamentoTest {
         LocalDateTime entrada = LocalDateTime.now();
         LocalDateTime saida = entrada.plusMinutes(45);
         double tarifa = estacionamento.calcularTarifa(entrada, saida, false);
-        assertEquals(5.90, tarifa, 0.01); // Adjusted delta for double comparison
+        assertEquals(5.90, tarifa, 0.01);
     }
 
     @Test
@@ -44,6 +44,15 @@ public class EstacionamentoTest {
         LocalDateTime entrada = LocalDateTime.now();
         LocalDateTime saida = entrada.plusHours(2);
         double tarifa = estacionamento.calcularTarifa(entrada, saida, false);
-        assertEquals(8.40, tarifa, 0.01); // Adjusted delta for double comparison
+        assertEquals(8.40, tarifa, 0.01);
+    }
+
+    @Test
+    public void testCalcularTarifa_MenosUmaHora() {
+        Estacionamento estacionamento = new Estacionamento();
+        LocalDateTime entrada = LocalDateTime.now();
+        LocalDateTime saida = entrada.plusHours(-1);
+        double tarifa = estacionamento.calcularTarifa(entrada, saida, false);
+        assertEquals(5.90, tarifa, 0.01);
     }
 }
