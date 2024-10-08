@@ -1,3 +1,5 @@
+package com.example;
+
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -69,7 +71,7 @@ public class CalculadoraTarifa {
         Duration duracaoPernoite = Duration.between(inicioPernoite, saida);
 
         long dias = duracaoPernoite.toDays();
-        if (duracaoPernoite.toHours() > 0 || duracaoPernoite.toMinutes() > 0) {
+        if (duracaoPernoite.toHoursPart() > 0 || duracaoPernoite.toMinutesPart() > 0) {
             dias++; // Conta o dia parcial como um dia inteiro
         }
         return dias + 1; // Inclui o primeiro dia de pernoite
