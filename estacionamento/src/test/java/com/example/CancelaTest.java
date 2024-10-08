@@ -1,14 +1,14 @@
 package com.example;
 
-import static org.junit.Assert.assertEquals;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
+
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 public class CancelaTest {
 
     @Test
-    public void testEmitirTicketDentroDoHorario_CT01() {
+    public void testCancelaTest_EmitirTicketDentroDoHorario() {
         Automovel automovel = new Automovel("ABC-1234", false);
         Cancela cancela = new Cancela();
         Ticket ticket = cancela.emitirTicket(automovel);
@@ -16,21 +16,21 @@ public class CancelaTest {
     }
 
     @Test
-    public void testEmitirTicketAntesDoHorario_CT02() {
+    public void testCancelaTest_EmitirTicketAntesDoHorario() {
         Automovel automovel = new Automovel("XYZ-9876", false);
         Cancela cancela = new Cancela();
             cancela.emitirTicket(automovel);
     }
 
     @Test
-    public void testEmitirTicketDepoisDoHorario_CT03() {
+    public void testCancelaTest_EmitirTicketDepoisDoHorario() {
         Automovel automovel = new Automovel("XYZ-9876", false);
         Cancela cancela = new Cancela();
             cancela.emitirTicket(automovel); 
     }
 
     @Test
-    public void testProcessarSaidaDentroDoHorario_CT04() {
+    public void testCancelaTest_ProcessarSaidaDentroDoHorario() {
         Automovel automovel = new Automovel("ABC-1234", false);
         Cancela cancela = new Cancela();
         Ticket ticket = cancela.emitirTicket(automovel);
@@ -39,7 +39,7 @@ public class CancelaTest {
     }
 
     @Test
-    public void testProcessarSaidaForaDoHorario_CT05() {
+    public void testCancelaTest_ProcessarSaidaForaDoHorario() {
         Automovel automovel = new Automovel("XYZ-9876", false);
         Cancela cancela = new Cancela();
         Ticket ticket = cancela.emitirTicket(automovel);
