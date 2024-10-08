@@ -1,38 +1,16 @@
 package com.example;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
-
-public class Estacionamento {
-    private static final double VALOR_FIXO = 5.90;
-    private static final double VALOR_POR_HORA = 2.50;
-    private static final double VALOR_PERNOITE = 50.00;
-    private static final int CORTESIA_MINUTOS = 15;
+public interface Estacionamento {
     
-    public double calcularTarifa(LocalDateTime entrada, LocalDateTime saida, boolean isVip) {
-        Duration duracao = Duration.between(entrada, saida);
-        long minutos = duracao.toMinutes();
-        
-        // Verificar cortesia
-        if (minutos <= CORTESIA_MINUTOS) {
-            return 0.0;
-        }
+    double CORTESIA_MINUTOS = 15;
+    double VALOR_HORA = 5.90;
+    double VALOR_HORA_ADICIONAL = 2.50;
+    double VALOR_PERNOITE = 50.00;
+    double DESCONTO_VIP = 0.5;
 
-        // Verificar pernoite
-        if (saida.getHour() >= 8 && !entrada.toLocalDate().isEqual(saida.toLocalDate())) {
-            double valor = VALOR_PERNOITE;
-            return isVip ? valor * 0.5 : valor;
-        }
+    double calcular(Ticket ticket);
 
-        // Até 1 hora de permanência
-        if (minutos <= 60) {
-            double valor = VALOR_FIXO;
-            return isVip ? valor * 0.5 : valor;
-        }
+    boolean isPernoite(Ticket ticket);
 
-        // Acima de 1 hora
-        long horas = (minutos - 60) / 60;
-        double valor = VALOR_FIXO + (horas * VALOR_POR_HORA);
-        return isVip ? valor * 0.5 : valor;
-    }
+    long calcularDiasPernoite(Ticket ticket);
 }
