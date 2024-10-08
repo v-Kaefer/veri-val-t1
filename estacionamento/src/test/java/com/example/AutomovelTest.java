@@ -22,4 +22,17 @@ public class AutomovelTest {
         assertEquals("VIP-5678", automovel.getPlaca());
         assertTrue(automovel.isVip());
     }
+
+    @Test
+    public void testAutomovel_CriarAutomovelSemplaca() {
+        Automovel automovel = new Automovel("", false);
+        assertEquals("", automovel.getPlaca());
+        assertFalse(automovel.isVip());
+    }
+
+    @Test
+    public void testAutomovel_GetPlaca() {
+        Automovel automovel = new Automovel("ABC123", true);
+        assertEquals("ABC123", automovel.getPlaca());
+    }
 }
