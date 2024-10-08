@@ -4,15 +4,53 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Ticket {
-    private static LocalDateTime entrada = LocalDateTime.now();
+    private int id;
+    private Automovel automovel;
+    private LocalDateTime entrada; 
+    private LocalDateTime saida;
+    private boolean pago;
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
-    public Ticket(LocalDateTime entrada) {
-        Ticket.entrada = entrada;
-        System.out.println("Ticket created at: " + entrada.format(formatter));
+    public Ticket(int id, Automovel automovel, LocalDateTime entrada) {
+        this.id = id;
+        this.automovel = automovel;
+        this.entrada = entrada;
+        this.pago = false;
     }
 
-    public static void main(String[] args) {
-        new Ticket(entrada);
+    public int getId() {
+        return id;
+    }
+
+    public Automovel getAutomovel() {
+        return automovel;
+    }
+
+    public LocalDateTime getEntrada() {
+        return entrada;
+    }
+
+    public LocalDateTime getSaida() {
+        return saida;
+    }
+
+    public boolean isPago() {
+        return pago;
+    }
+
+    public void setSaida(LocalDateTime saida) {
+        this.saida = saida;
+    }
+
+    public void setPago(boolean pago) {
+        this.pago = pago;
+    }
+
+    public String formatarEntrada() {
+        return this.entrada.format(formatter);
+    }
+
+    public String formatarSaida() {
+        return this.saida != null ? this.saida.format(formatter) : "Sem saída registrada";
     }
 }
