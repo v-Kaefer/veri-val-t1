@@ -19,14 +19,14 @@ jobs:
         - name: Cache Maven packages
           uses: actions/cache@v2
           with:
-              path: ~/.m2/repository/estacionamento
+              path: ~/.m2/repository
               key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
               restore-keys: |
                   ${{ runner.os }}-maven-
 
         - name: Install dependencies
-          run: mvn install -DskipTests
+          run: mvn install -DskipTests --file estacionamento/pom.xml
 
         - name: Run tests
-          run: mvn test -Dtest=com.example.* --file estacionamento/pom.xml
+          run: mvn test --file estacionamento/pom.xml
           working-directory: estacionamento
