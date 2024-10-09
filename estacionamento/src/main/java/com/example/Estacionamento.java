@@ -1,5 +1,6 @@
 package com.example;
 
+import java.time.Duration;
 import java.time.LocalTime;
 
 interface Estacionamento {
@@ -9,4 +10,5 @@ interface Estacionamento {
     static final int CORTESIA = 15;
     static final LocalTime HORARIO_ABERTURA = LocalTime.of(8, 0);
     static final LocalTime HORARIO_FECHAMENTO = LocalTime.of(2, 0);
+    static final Duration HORARIO_OPERACAO = Duration.ofHours(18);
 }

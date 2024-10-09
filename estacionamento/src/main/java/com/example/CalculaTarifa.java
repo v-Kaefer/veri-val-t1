@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class CalculaTarifa implements Estacionamento {
-
+    
     private LocalDateTime entrada;
     private LocalDateTime saida;
     private boolean isVip;
