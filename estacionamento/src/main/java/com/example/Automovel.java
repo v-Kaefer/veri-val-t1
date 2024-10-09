@@ -30,7 +30,7 @@ public class Automovel {
         System.out.print("Realizando pagamento...");
         ticket.setPago(true);
         System.out.print("Pagamento realizado com sucesso!");	
-        return true;
+        return ticket.isPago();
     }
 
 }

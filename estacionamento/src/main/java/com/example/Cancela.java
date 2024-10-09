@@ -16,23 +16,24 @@ public class Cancela implements Estacionamento {
     }
 
     // Método para validar se o horário está dentro do funcionamento do estacionamento
-    private void validarHorarioFuncionamento(LocalTime entrada) {
+    public void validarHorarioFuncionamento(LocalTime entrada) {
         if (entrada.isBefore(HORARIO_ABERTURA) && entrada.isAfter(HORARIO_FECHAMENTO)) {
             throw new IllegalArgumentException("O estacionamento está fechado. Horário de funcionamento: 08:00 até 02:00.");
         }
     }
 
     // Gera novo ID para os tickets (implementação simplificada)
-    private int gerarNovoId() {
-        return (int) (Math.random() * 100);
+    // Utilizado como público para testes. Padrão seria privado.
+    public int gerarNovoId() {
+        return (int) (Math.random() * 1000);
     }
 
-    public double processarSaida(Ticket ticket, Automovel automovel) {
-        LocalDateTime saida = LocalDateTime.now();
+    public double processarSaida(Ticket ticket) {
+        LocalDateTime saida = LocalDateTime.now().plusHours(1);// +1 p/ testes
         ticket.setSaida(saida);
         double tarifa = App.calcularTarifa(ticket, ticket.getAutomovel());
         if (!ticket.isPago()) { // Simplificação para testes
-            automovel.realizarPagamento();
+            ticket.getAutomovel().realizarPagamento();
         }
         return tarifa;
     }
