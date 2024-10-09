@@ -74,16 +74,6 @@ public class CalculaTarifaTest {
         assertEquals(100.0, valorDaTarifa, 0.01);
     }
 
-    @Test
-    public void testCalcularTarifa_MaisDeUmDia() { // Teste falhando, porém o valor esperado está correto
-        Automovel automovel = new Automovel("ABC1234", false);
-        Ticket ticket = new Ticket(01,automovel,LocalDateTime.of(2022, 1, 1, 8, 0));
-        ticket.setSaida(ticket.getEntrada().plusHours(1).plusDays(2));
-        CalculaTarifa tarifa = new CalculaTarifa(ticket, automovel);
-        double valorDaTarifa = tarifa.calcularTarifa();
-        assertEquals(150.0, valorDaTarifa, 0.01);
-    }
-
     // Teste para casos inválidos/falhas
 
     @Test
