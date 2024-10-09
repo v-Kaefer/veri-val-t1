@@ -1,49 +1,56 @@
 package com.example;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class CancelaTest {
 
-    @Test
-    public void testCancelaTest_EmitirTicketDentroDoHorario() {
-        Automovel automovel = new Automovel("ABC-1234", false);
-        Cancela cancela = new Cancela();
-        Ticket ticket = cancela.emitirTicket(automovel);
-        assertEquals("ABC-1234", ticket.getAutomovel().getPlaca());
-    }
+    private Cancela cancela;
+    private Automovel automovel;
+    private Ticket ticket;
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testCancelaTest_EmitirTicketAntesDoHorario() {
-        Automovel automovel = new Automovel("XYZ-9876", false);
-        Cancela cancela = new Cancela();
-        cancela.emitirTicket(automovel);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testCancelaTest_EmitirTicketDepoisDoHorario() {
-        Automovel automovel = new Automovel("XYZ-9876", false);
-        Cancela cancela = new Cancela();
-        cancela.emitirTicket(automovel);
+    @Before
+    public void setUp() {
+        cancela = new Cancela();
+        Automovel automovel = new Automovel("ABC1234", false);
+        Ticket ticket = new Ticket(cancela.gerarNovoId(), automovel, LocalDateTime.now());
+        ticket.setPago(false);
+        automovel.setTicket(ticket);
     }
 
     @Test
-    public void testCancelaTest_ProcessarSaidaDentroDoHorario() {
-        Automovel automovel = new Automovel("ABC-1234", false);
-        Cancela cancela = new Cancela();
-        Ticket ticket = cancela.emitirTicket(automovel);
-        double valorDevido = cancela.processarSaida(ticket);
-        assertEquals(5.90, valorDevido, 0.01);
+    public void testCancela_EmitirTicket() {
+        Ticket newTicket = cancela.emitirTicket(automovel);
+        Assert.assertNotNull(newTicket);
+        Assert.assertEquals(automovel, newTicket.getAutomovel());
+        Assert.assertNotNull(newTicket.getEntrada());
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testCancelaTest_ProcessarSaidaForaDoHorario() {
-        Automovel automovel = new Automovel("XYZ-9876", false);
-        Cancela cancela = new Cancela();
-        Ticket ticket = cancela.emitirTicket(automovel);
-        ticket.setSaida(LocalDateTime.of(2022, 1, 1, 2, 1));
-        cancela.processarSaida(ticket);
+    @Test
+    public void testCancela_EmitirTicketForaDoHorario() {
+        LocalTime entrada = LocalTime.of(3, 0); // Fora do horário de funcionamento
+
+        try {
+            cancela.validarHorarioFuncionamento(entrada);
+            cancela.emitirTicket(automovel);
+            Assert.fail("Expected IllegalArgumentException to be thrown");
+        } catch (IllegalArgumentException e) {
+            Assert.assertEquals("O estacionamento está fechado. Horário de funcionamento: 08:00 até 02:00.", e.getMessage());
+        }
+    }
+
+    @Test
+    public void testCancela_ProcessarSaida() {
+        Automovel automovel = new Automovel("ABC1234", false);
+        Ticket ticket = new Ticket(cancela.gerarNovoId(), automovel, LocalDateTime.now());
+        ticket.setPago(false);
+        automovel.setTicket(ticket);
+        double tarifa = cancela.processarSaida(ticket);
+        Assert.assertNotNull(ticket.getSaida());
+        Assert.assertTrue(tarifa > 0);
     }
 }

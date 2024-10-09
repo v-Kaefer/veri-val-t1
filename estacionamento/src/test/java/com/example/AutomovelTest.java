@@ -3,36 +3,42 @@ package com.example;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import org.junit.Before;
 import org.junit.Test;
+
 
 public class AutomovelTest {
 
-    @Test
-    public void testCriacaoAutomovel() {
-        Automovel automovel = new Automovel("ABC-1234", false);
+    private Automovel automovel;
+    private Ticket ticket;
 
-        assertEquals("ABC-1234", automovel.getPlaca());
-        assertFalse(automovel.isVip());
+    @Before
+    public void setUp() {
+        automovel = new Automovel("ABC-1234", true);
+        ticket = new Ticket(0, automovel, null);
+        automovel.setTicket(ticket);
     }
 
     @Test
-    public void testAutomovelVip() {
-        Automovel automovel = new Automovel("VIP-5678", true);
+    public void testGetPlaca() {
+        assertEquals("ABC-1234", automovel.getPlaca());
+    }
 
-        assertEquals("VIP-5678", automovel.getPlaca());
+    @Test
+    public void testIsVip() {
         assertTrue(automovel.isVip());
     }
 
     @Test
-    public void testAutomovel_CriarAutomovelSemplaca() {
-        Automovel automovel = new Automovel("", false);
-        assertEquals("", automovel.getPlaca());
-        assertFalse(automovel.isVip());
+    public void testSetAndGetTicket() {
+        assertEquals(ticket, automovel.getTicket());
     }
 
     @Test
-    public void testAutomovel_GetPlaca() {
-        Automovel automovel = new Automovel("ABC123", true);
-        assertEquals("ABC123", automovel.getPlaca());
+    public void testRealizarPagamento() {
+        assertFalse(ticket.isPago());
+        boolean result = automovel.realizarPagamento();
+        assertTrue(result);
+        assertTrue(ticket.isPago());
     }
 }

@@ -25,4 +25,12 @@ public class Automovel {
     public Ticket getTicket() {
         return ticket;
     }
+
+    public boolean realizarPagamento() {
+        System.out.print("Realizando pagamento...");
+        ticket.setPago(true);
+        System.out.print("Pagamento realizado com sucesso!");	
+        return ticket.isPago();
+    }
+
 }

@@ -44,6 +44,7 @@ public class Ticket {
 
     public void setPago(boolean pago) {
         this.pago = pago;
+        System.out.print("Ticket pago! Volte sempre");
     }
 
     public String formatarEntrada() {

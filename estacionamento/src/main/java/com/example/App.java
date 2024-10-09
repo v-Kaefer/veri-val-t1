@@ -21,8 +21,8 @@ public class App {
         System.out.println("Tarifa: " + valorDevido);
     }
 
-    public static double calcularTarifa(Ticket ticket) {
-        CalculadoraTarifa calculadora = new CalculadoraTarifa(ticket);
-        return calculadora.calcular();
+    public static double calcularTarifa(Ticket ticket, Automovel automovel) {
+        CalculaTarifa calculadora = new CalculaTarifa(ticket, automovel);
+        return calculadora.calcularTarifa();
     }
 }
