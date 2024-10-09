@@ -25,7 +25,9 @@ jobs:
             ${{ runner.os }}-maven-
 
       - name: Install dependencies
-        run: mvn install -DskipTests --file estacionamento/pom.xml
+        run: mvn install -DskipTests --file pom.xml
+        working-directory: estacionamento
 
       - name: Run tests
-        run: mvn test --file estacionamento/pom.xml
+        run: mvn test --file pom.xml
+        working-directory: estacionamento
