@@ -15,18 +15,18 @@ public class CancelaTest {
         assertEquals("ABC-1234", ticket.getAutomovel().getPlaca());
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testCancelaTest_EmitirTicketAntesDoHorario() {
         Automovel automovel = new Automovel("XYZ-9876", false);
         Cancela cancela = new Cancela();
-            cancela.emitirTicket(automovel);
+        cancela.emitirTicket(automovel);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testCancelaTest_EmitirTicketDepoisDoHorario() {
         Automovel automovel = new Automovel("XYZ-9876", false);
         Cancela cancela = new Cancela();
-            cancela.emitirTicket(automovel); 
+        cancela.emitirTicket(automovel);
     }
 
     @Test
@@ -38,12 +38,12 @@ public class CancelaTest {
         assertEquals(5.90, valorDevido, 0.01);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testCancelaTest_ProcessarSaidaForaDoHorario() {
         Automovel automovel = new Automovel("XYZ-9876", false);
         Cancela cancela = new Cancela();
         Ticket ticket = cancela.emitirTicket(automovel);
-            ticket.setSaida(LocalDateTime.of(2022, 1, 1, 2, 1));
-            cancela.processarSaida(ticket); 
-        }
+        ticket.setSaida(LocalDateTime.of(2022, 1, 1, 2, 1));
+        cancela.processarSaida(ticket);
     }
+}
