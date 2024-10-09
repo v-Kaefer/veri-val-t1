@@ -68,7 +68,7 @@ public class CalculaTarifaTest {
     public void testCalcularTarifa_DuasPernoites() {
         Automovel automovel = new Automovel("ABC1234", false);
         Ticket ticket = new Ticket(01,automovel,LocalDateTime.of(2022, 1, 1, 20, 0));
-        ticket.setSaida(ticket.getEntrada().plusHours(10).plusDays(1));
+        ticket.setSaida(ticket.getEntrada().plusHours(12).plusDays(1));
         CalculaTarifa tarifa = new CalculaTarifa(ticket, automovel);
         double valorDaTarifa = tarifa.calcularTarifa();
         assertEquals(100.0, valorDaTarifa, 0.01);

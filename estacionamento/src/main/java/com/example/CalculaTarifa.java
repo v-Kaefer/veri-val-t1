@@ -19,9 +19,6 @@ public class CalculaTarifa implements Estacionamento {
     }
 
     public double calcularTarifa () {
-        LocalTime horarioFechamento = HORARIO_ABERTURA.plus(HORARIO_OPERACAO);
-        LocalTime horarioSaida = saida.toLocalTime();
-
         // Calcular a duração total em minutos
         Duration duracaoEstacionado = Duration.between(entrada, saida);
         long horasEstacionado = duracaoEstacionado.toHours();
@@ -48,8 +45,8 @@ public class CalculaTarifa implements Estacionamento {
             return isVip ? valor * 0.5 : valor;
         }
 
-        // Verificar pernoite
-        if (saida.getHour() > HORARIO_FECHAMENTO.getHour() && !entrada.toLocalDate().isEqual(saida.toLocalDate())) {
+        // Verificar valor pernoite
+        if (isPernoite()) {
             long diasPernoite = calcularDiasPernoite();
             valor = VALOR_PERNOITE * diasPernoite;
             return isVip ? valor * 0.5 : valor;
@@ -69,10 +66,10 @@ public class CalculaTarifa implements Estacionamento {
         LocalDateTime inicioPernoite = entrada.toLocalDate().atTime(LocalTime.of(8, 0)).plusDays(1);
         Duration duracaoPernoite = Duration.between(inicioPernoite, saida);
 
-        long dias = duracaoPernoite.toDays();
-        if (duracaoPernoite.toHoursPart() > 0 || duracaoPernoite.toMinutesPart() > 0) {
-            dias++; // Conta o dia parcial como um dia inteiro
+        long diasEmPernoite = duracaoPernoite.toDays();
+        if (duracaoPernoite.toHoursPart() >= 24 || duracaoPernoite.toMinutesPart() > 0) {
+            diasEmPernoite++; // Conta o dia parcial como um dia inteiro
         }
-        return dias + 1; // Inclui o primeiro dia de pernoite
+        return diasEmPernoite + 1; // Inclui o primeiro dia de pernoite
     }
 }
