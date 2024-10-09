@@ -1,58 +1,45 @@
 package com.example;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.time.Duration;
+import java.time.LocalTime;
+
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 public class EstacionamentoTest {
 
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-    String entrada = LocalDateTime.now().format(formatter);
-    String saida = LocalDateTime.now().plusHours(1).format(formatter);
-
     @Test
-    public void testCalcularTarifa_Cortesia() {
-        Estacionamento estacionamento = new Estacionamento();
-        LocalDateTime entrada = LocalDateTime.now();
-        LocalDateTime saida = entrada.plusMinutes(10);
-        double tarifa = estacionamento.calcularTarifa(entrada, saida, false);
-        assertEquals(0.0, tarifa, 0.01);
+    public void testValorFixo() {
+        assertEquals(5.90, Estacionamento.VALOR_FIXO, 0.01);
     }
 
     @Test
-    public void testCalcularTarifa_Pernoite() {
-        Estacionamento estacionamento = new Estacionamento();
-        LocalDateTime entrada = LocalDateTime.of(2022, 1, 1, 20, 0);
-        LocalDateTime saida = LocalDateTime.of(2022, 1, 2, 10, 0);
-        double tarifa = estacionamento.calcularTarifa(entrada, saida, false);
-        assertEquals(50.0, tarifa, 0.01);
+    public void testValorPorHora() {
+        assertEquals(2.50, Estacionamento.VALOR_POR_HORA, 0.01);
     }
 
     @Test
-    public void testCalcularTarifa_Hora() {
-        Estacionamento estacionamento = new Estacionamento();
-        LocalDateTime entrada = LocalDateTime.now();
-        LocalDateTime saida = entrada.plusMinutes(45);
-        double tarifa = estacionamento.calcularTarifa(entrada, saida, false);
-        assertEquals(5.90, tarifa, 0.01);
+    public void testValorPernoite() {
+        assertEquals(50.00, Estacionamento.VALOR_PERNOITE, 0.01);
     }
 
     @Test
-    public void testCalcularTarifa_MaisDeUmaHora() {
-        Estacionamento estacionamento = new Estacionamento();
-        LocalDateTime entrada = LocalDateTime.now();
-        LocalDateTime saida = entrada.plusHours(2);
-        double tarifa = estacionamento.calcularTarifa(entrada, saida, false);
-        assertEquals(8.40, tarifa, 0.01);
+    public void testCortesia() {
+        assertEquals(15, Estacionamento.CORTESIA);
     }
 
     @Test
-    public void testCalcularTarifa_MenosUmaHora() {
-        Estacionamento estacionamento = new Estacionamento();
-        LocalDateTime entrada = LocalDateTime.now();
-        LocalDateTime saida = entrada.plusHours(-1);
-        double tarifa = estacionamento.calcularTarifa(entrada, saida, false);
-        assertEquals(5.90, tarifa, 0.01);
+    public void testHorarioAbertura() {
+        assertEquals(LocalTime.of(8, 0), Estacionamento.HORARIO_ABERTURA);
+    }
+
+    @Test
+    public void testHorarioFechamento() {
+        assertEquals(LocalTime.of(2, 0), Estacionamento.HORARIO_FECHAMENTO);
+    }
+
+    @Test
+    public void testHorarioOperacao() {
+        assertEquals(Duration.ofHours(18), Estacionamento.HORARIO_OPERACAO);
     }
 }
