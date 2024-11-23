@@ -1,3 +1,5 @@
 .github/*
 estacionamento/target/*
 src/test/*
+.embold/issues.db
+.embold/vscode-logs.log
